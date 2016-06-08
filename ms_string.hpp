@@ -10,11 +10,12 @@ namespace ms_string {
 		container.clear();
 		if (content.empty()) return true;
 		long l_index = -1, l_last;
-		while ((l_index = content.find(ch, l_last = (l_index + 1))) > 0) {
+		while ((l_index = content.find(ch, l_last = (l_index + 1))) >= 0) {
+			if (0 == l_index) continue;
 			typename T::iterator iter(container.end());
 			container.insert(iter, content.substr(l_last, l_index - l_last));
 		}
-		if (l_last >= 0) {
+		if (l_last >= 0 && l_last < (long)content.size() -1) {
 			typename T::iterator iter(container.end());
 			container.insert(iter, content.substr(l_last));
 		}
